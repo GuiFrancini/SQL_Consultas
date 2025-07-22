@@ -1,0 +1,142 @@
+BANCO DE DADOS
+==============
+-- Restaurante
+
+CREATE TABLE Cliente (
+cli_codigo int PRIMARY KEY,
+cli_cpf varchar(14),
+cli_nome varchar(60),
+cli_cidade varchar(30),
+cli_dataNascimento varchar(10),
+cli_email varchar(60),
+cli_telefone varchar(15),
+UNIQUE (cli_cpf, cli_email, cli_telefone)
+);
+
+CREATE TABLE FormaPagamento (
+fpg_codigo int PRIMARY KEY,
+fpg_nome varchar(50) UNIQUE
+);
+
+CREATE TABLE Garcom (
+gar_codigo int PRIMARY KEY,
+gar_nome varchar(60),
+gar_datanascimento varchar(10),
+gar_horaTrabalho varchar(15)
+);
+
+CREATE TABLE ItemPedido (
+itm_numero int PRIMARY KEY,
+car_codigo int,
+itm_quantidade int,
+itm_valorunitario decimal(8,2),
+itm_valorTotal decimal(8,2),
+ped_numero int,
+gar_codigo int
+);
+
+CREATE TABLE Cardapio (
+car_codigo int PRIMARY KEY,
+car_nome varchar(50),
+car_preco decimal(8,2),
+car_unidade int,
+car_pesolitro int,
+cat_codigo int
+);
+
+CREATE TABLE Categoria (
+cat_codigo int PRIMARY KEY,
+cat_nome varchar(50) UNIQUE
+);
+
+CREATE TABLE Pedido (
+ped_numero int PRIMARY KEY,
+ped_data date,
+ped_valorTotal decimal(8,2),
+ped_mesa int,
+ped_numeroPessoas int,
+cli_codigo int,
+fpg_codigo int
+);
+
+
+Escreva a(s) Instrução(ões) SQL para atender aos seguintes requisitos
+
+1. Exibir o faturamento do primeiro semestre de 2024 por item do cardápio; considerar no resultado somente os itens com valor acima de 500,00; exibir em ordem alfabética ascendente.
+
+SELECT(ItemPedido.itm_valorTotal, Pedido.ped_data,Cardapio.car_preco
+Cardapio.car_preco >= '500.00';
+WHERE = '01/01/2024' BETWEEN '31/06/2024'
+ORDER BY DESC;
+
+2. Exibir o nome e data de nascimento de todos os clientes que nasceram na mesma data que o garçom "Cláudio"; exibir em ordem alfabética descendente.
+SELECT(Cliente.cli_nome, Cliente.cli_dataNascimento, Garcom.gar_nome
+JOIN Pedido.cli_codigo ON Cliente.cli_codigo
+JOIN ItemPedido.ped_numero ON Pedido.ped_numero
+JOIN ItemPedido.gar_codigo ON Garcom.gar_codigo
+
+
+
+3. Quais clientes possuem pedidos maiores que a média dos pedidos da cliente Mariana? Exibir o nome do cliente; numero e  data do pedido; número do item, código e nome do item do cardápio; quantidade, valor unitário e valor total do item.
+SELECT(Cliente.cli_nome,Pedido.cli_codigo, Pedido.ped_data
+AVG(cli_codigo) FROM Pedido
+JOIN Pedido.cli_codigo ON Cliente.cli_codigo
+JOIN ItemPedido.ped_numero ON Pedido.ped_numero
+
+4. Quantos itens de pedidos (itm_quantidade) cada garçom entregou no dia 10.05.2024? Exibir em ordem alfabética.
+
+SELECT(ItemPedido.itm_quantidade, ItemPedido.gar_codigo, Pedido.ped_date
+FROM itemPedido
+join itemPedido.gar_codigo ON Garcom.gar_codigo
+WHERE=
+ORDER BY Garcom.gar_nome DESC;
+
+
+5. Exibir o nome do cliente, data e o número da mesa dos clientes que comemoram aniversário no mês do pedido.
+
+SELECT (Cliente.cli_nome AS nome,
+ Pedido.ped_data AS nome,
+ Pedido.ped_mesa AS numero mesa,
+ Cliente.cli_dataNascimento
+JOIN Cliente.cli_codigo ON Pedido.cli_codigo
+
+
+6. Quantos clientes por cidade o restaurante possui? Exibir somente quando o resultado for menor que 10.
+SELECT cli_cidade;
+FROM Cliente
+SUM(cli_cidade)
+>=10
+
+7. Se o restaurante pagar 1.5% de gorjeta sobre o valor de cada pedido, qual será o valor da comissão no mês de setembro de 2024.
+SELECT(ped_valorTotal)
+FROM Pedido
+WHERE ped_valorTotal
+Pedido.ped_valorTotal = ped_valorTotal * 1.0015
+
+8. Quais foram os itens consumidos pelo cliente "Luis" no último mês? Exibir data, número do pedido, nome da forma de pagamento, nome do item do cardápio, valor unitário, valor total do item, nome do garçom e nome da categoria, em ordem de data.
+SELECT(Cliente.cli_nome, Pedido.ped_data, Pedido.ped_numero, FormaPagamento.fpg_nome, Cardapio.car_nome,Cardapio.car_preco, Pedido.ped_valorTotal,Garcom.gar_nome, Categoria.cat_nome )
+ORDER BY ped_data;
+
+9. Exibir o código dos itens do cardápio que não foram consumidos no ano de 2024.
+SELECT(Cardapio.car_codigo, Pedido.per_date
+Pedido.per_date = '2024';
+
+
+10. Executar as seguintes operações:
+
+    - Inserir um item na tabela ITEMPEDIDO.   
+INSERT INTO ItemPedido (itm_numero,car_codigo,itm_quantidade, itm_valorunitario,itm_valorTotal ,ped_numero,gar_codigo)
+VALUES(1,1,3, 5.00, 15.00,1,1);
+ 
+    - Remover do cardápio os itens com código  33, 40 a 45, 90, 180.
+DELETE car_codigo
+FROM Cardapio
+Where = '40'BETEWEEN '45' AND '33' AND '90' AND '180';
+
+    - Reajustar os preços dos itens do cardápio, conforme a tabela:
+        Bebidas - 8%
+ALTER TABLE Cardapio
+FROM car_preco
+Cardapio.car_nome ='Bebidas'
+Cardapio.car_preco = car_preco * 1.08;
+

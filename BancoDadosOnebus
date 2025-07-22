@@ -1,0 +1,15 @@
+A OneBus é um projeto criado por estudantes da Fatec Santana de Parnaíba da turma do 4°semestre de Análise e desenvolvimento de sistemas  que consiste em um sistema de bilhetagem eletronica integrado a um aplicativo, onde as pessoas podem rpagar passagem pelo qr code, recarregar o cartão por aproximação, consultar saldo e rotas e horarios. parecido com os já existentes(Top, BEM, Bilhete UNico)  
+
+para integrar passes e cartões de ônibus melhorar a eficiencia do sistema de passes e  cartões de ônibus
+
+
+A OneBus é um sistema de bilhetagem eletrônica que permite aos usuários recarregar seus cartões, consultar saldo e rotas de ônibus, e pagar a passagem com QR Code via aplicativo.
+
+A OneBus é um projeto desenvolvido por estudantes do 4º semestre de Análise e Desenvolvimento de Sistemas da Fatec Santana de Parnaíba. O sistema consiste em uma plataforma de bilhetagem eletrônica integrada a um aplicativo, que oferece funcionalidades como pagamento de passagem via QR Code, recarga de cartão por aproximação (NFC), consulta de saldo, além de informações sobre rotas e horários de ônibus. Inspirado em sistemas como TOP, BEM e Bilhete Único, o OneBus busca oferecer uma experiência segura e moderna aos usuários.
+
+
+
+
+
+
+
